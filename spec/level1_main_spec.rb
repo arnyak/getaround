@@ -6,6 +6,6 @@ describe 'level1' do
         car = {'id' => 1, 'price_per_day' => 2000, 'price_per_km' => 10}
         rental = {'id' => 1, 'car_id' => 1, 'start_date' => "2017-12-08", 'end_date' => "2017-12-10", 'distance' => 100}
 
-        expect(rental_price(car, rental)).to eq 7000
+        expect(Rental.rental_price(car, rental)).to eq 7000
     end
 end
