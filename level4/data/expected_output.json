@@ -36,17 +36,17 @@
         {
           "who": "driver",
           "type": "debit",
-          "amount": 6800
+          "amount": 10400
         },
         {
           "who": "owner",
           "type": "credit",
-          "amount": 4760
+          "amount": 7280
         },
         {
           "who": "insurance",
           "type": "credit",
-          "amount": 1020
+          "amount": 1560
         },
         {
           "who": "assistance",
@@ -56,7 +56,7 @@
         {
           "who": "drivy",
           "type": "credit",
-          "amount": 820
+          "amount": 1360
         }
       ]
     },
