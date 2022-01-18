@@ -43,17 +43,17 @@
         {
           "who": "driver",
           "type": "debit",
-          "amount": 8800
+          "amount": 12400
         },
         {
           "who": "owner",
           "type": "credit",
-          "amount": 4760
+          "amount": 7280
         },
         {
           "who": "insurance",
           "type": "credit",
-          "amount": 1020
+          "amount": 1560
         },
         {
           "who": "assistance",
@@ -63,13 +63,15 @@
         {
           "who": "drivy",
           "type": "credit",
-          "amount": 2820
+          "amount": 1360
         }
       ]
     },
     {
       "id": 3,
-      "options": [],
+      "options": [
+
+      ],
       "actions": [
         {
           "who": "driver",
