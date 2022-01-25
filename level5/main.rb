@@ -82,6 +82,8 @@ class Option
     end
 
     def self.find_rental_options(rental_id)
+       p rental_id
+       p options.select {|option| option['rental_id'] == rental_id}.map{|opt| opt['type']}
        options.select {|option| option['rental_id'] == rental_id}.map{|opt| opt['type']}
     end
 end

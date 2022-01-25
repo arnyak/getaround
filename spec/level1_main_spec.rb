@@ -1,11 +1,11 @@
 require 'spec_helper'
-require_relative '../level1/main'
+require_relative '../level1/models/rental'
 
 describe 'level1' do 
-    it 'should compute renatl price amount' do
-        car = {'id' => 1, 'price_per_day' => 2000, 'price_per_km' => 10}
-        rental = {'id' => 1, 'car_id' => 1, 'start_date' => "2017-12-08", 'end_date' => "2017-12-10", 'distance' => 100}
+    it 'should compute rental price amount' do
+        car = Car.new({id: 1, price_per_day: 2000, price_per_km: 10, user_id: 1})
+        rental =Rental.new({id: 1, car_id: 1, start_date: "2017-12-8", end_date: "2017-12-10", distance: 100, driver_id: 2})
 
-        expect(Rental.rental_price(car, rental)).to eq 7000
+        expect(rental.rental_price).to eq 7000
     end
 end
