@@ -66,4 +66,25 @@ class Rental
     def rental_period
         (Date.parse(self.end_date) - Date.parse(self.start_date)).to_i + 1
     end
+
+
+    # Compute commision amount
+    def commission
+        (self.decreasing_rental_price * 0.3).to_i
+    end
+
+    # Compute insurance_fee amount
+    def insurance_fee
+        (self.commission * 0.5).to_i
+    end
+    
+    # Compute assistance_fee amount
+    def assistance_fee
+        (self.rental_period * 100).to_i
+    end
+
+    # Compute drivy_fee amount
+    def drivy_fee
+        (self.commission - (self.insurance_fee + self.assistance_fee)).to_i
+    end
 end
