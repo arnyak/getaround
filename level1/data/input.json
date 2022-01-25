@@ -75,6 +75,12 @@
       "id": 8,
       "first_name": "Kodjo",
       "last_name": "Durand"
+    },
+    {
+      "id": 9,
+      "first_name": "Test",
+      "last_name": "Test",
+      "who": null
     }
   ]
 }

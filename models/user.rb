@@ -31,6 +31,6 @@ class User
     end
 
     def rentals
-        Rental.find_all_by('driver_id', self.driver_id)        
+        Rental.find_all_by('driver_id', self.id)        
     end
 end
