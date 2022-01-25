@@ -2,6 +2,7 @@ require 'date'
 require_relative 'model_methods'
 require_relative 'user'
 require_relative 'car'
+require_relative 'option'
 
 
 
@@ -119,6 +120,77 @@ class Rental
           who: "drivy",
           type: "credit",
           amount: rental.drivy_fee
+        }]
+    end
+
+    def options
+        Option.find_all_by('rental_id', self.id)        
+    end
+
+    def rental_options_amount
+        _options = self.options.map(&:type)
+        options_amount = 0
+        options_amount += self.option_gps_amount if _options.include?('gps')
+        options_amount += self.option_baby_seat_amount if _options.include?('baby_seat')
+        options_amount += self.option_additional_insurance_amount if _options.include?('additional_insurance')
+        options_amount
+    end
+
+    # Compute gps option amount
+    def option_gps_amount
+        (self.rental_period * 5 * 100).to_i
+    end
+
+    # Compute baby seat option amount
+    def option_baby_seat_amount
+        (self.rental_period * 2 * 100).to_i
+    end
+
+    # Compute additional_insurance option amount
+    def option_additional_insurance_amount
+        (self.rental_period * 10 * 100).to_i
+    end
+
+    # Compute decreasing_rental_price_with_options
+    def decreasing_rental_price_with_options
+        (self.rental_options_amount + self.decreasing_rental_price).to_i
+    end
+
+
+    # Compute owner debit amount
+    def owner_debit_amount_with_options
+        self.owner_debit_amount + self.rental_options_amount
+    end
+
+    def drivy_fee_with_options
+        self.drivy_fee + self.rental_options_amount
+    end
+    
+    def self.compute_action_with_options(rental)
+        [{
+          who: "driver",
+          type: "debit",
+          amount: rental.decreasing_rental_price_with_options
+        },
+        {
+          who: "owner",
+          type: "credit",
+          amount: rental.owner_debit_amount_with_options
+        },
+        {
+          who: "insurance",
+          type: "credit",
+          amount: rental.insurance_fee
+        },
+        {
+          who: "assistance",
+          type: "credit",
+          amount: rental.assistance_fee
+        },
+        {
+          who: "drivy",
+          type: "credit",
+          amount: rental.drivy_fee_with_options
         }]
     end
 end
