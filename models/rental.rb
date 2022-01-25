@@ -87,4 +87,38 @@ class Rental
     def drivy_fee
         (self.commission - (self.insurance_fee + self.assistance_fee)).to_i
     end
+
+    # Compute owner debit amount
+    def owner_debit_amount
+        self.decreasing_rental_price - self.commission
+    end
+
+    
+    def self.compute_action(rental)
+        [{
+          who: "driver",
+          type: "debit",
+          amount: rental.decreasing_rental_price
+        },
+        {
+          who: "owner",
+          type: "credit",
+          amount: rental.owner_debit_amount
+        },
+        {
+          who: "insurance",
+          type: "credit",
+          amount: rental.insurance_fee
+        },
+        {
+          who: "assistance",
+          type: "credit",
+          amount: rental.assistance_fee
+        },
+        {
+          who: "drivy",
+          type: "credit",
+          amount: rental.drivy_fee
+        }]
+    end
 end
