@@ -50,4 +50,20 @@ class Rental
         rental_period = (Date.parse(self.end_date) - Date.parse(self.start_date)).to_i + 1
         self.car.price_per_day*rental_period + self.car.price_per_km*self.distance
     end
+
+    # Compute decreasing rental price
+    def decreasing_rental_price
+        decreased_rental_price = case self.rental_period
+            when 1 then self.car.price_per_day
+            when 1..4 then self.car.price_per_day + (self.car.price_per_day * 3 * 0.9).to_i
+            when 4..10 then self.car.price_per_day + (self.car.price_per_day * 3 * 0.9).to_i + (self.car.price_per_day * 6 * 0.7).to_i
+            when 10.. then self.car.price_per_day + (self.car.price_per_day * 3 * 0.9).to_i + (self.car.price_per_day * 6 * 0.7).to_i + (self.car.price_per_day * (self.rental_period - 10) * 0.5).to_i
+        end
+    
+        decreased_rental_price + (self.car.price_per_km*self.distance).to_i
+    end
+
+    def rental_period
+        (Date.parse(self.end_date) - Date.parse(self.start_date)).to_i + 1
+    end
 end
