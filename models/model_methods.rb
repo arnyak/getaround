@@ -6,7 +6,7 @@ module ModelMethods
             if self.class.validate(self)
                 if self.id.nil? or self.class.find_by_id(self.id).nil?
                     object = ModelMethods::compose_object(self.class.attributes, self)
-                    all_objects = self.class.all 
+                    all_objects = self.class.all
                     all_objects << object
                     self.class.save_data(all_objects)
                 else
@@ -17,13 +17,15 @@ module ModelMethods
     end
 
     module ClassMethods
+        $level = "level1"
+
         def all
             load_input_data[ModelMethods::pluralize(self.name)] || []
         end
 
         def load_input_data
             begin
-                JSON.parse(File.read(File.join(File.dirname(__FILE__), "../data/input.json")))
+                JSON.parse(File.read(File.join(File.dirname(__FILE__), "../#{$level}/data/input.json")))
             rescue JSON::ParserError => e
                 raise "Error when parsing the input.json file: #{e}"
             end 
@@ -68,7 +70,7 @@ module ModelMethods
             begin
                 input_data = load_input_data
                 input_data[ModelMethods::pluralize(self.name)] = all_objects
-                File.open(File.join(File.dirname(__FILE__), "../data/input.json"),"w+") { |f| f.write JSON.pretty_generate(input_data) }
+                File.open(File.join(File.dirname(__FILE__), "../#{$level}/data/input.json"),"w+") { |f| f.write JSON.pretty_generate(input_data) }
                 true
             rescue Exception => e
                 raise "#{self.name} not save with errors : #{e}"

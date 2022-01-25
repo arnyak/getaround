@@ -25,7 +25,7 @@ class Rental
 
    
     def self.validate(rental)
-        if rental.car_id.to_i > 0 and rental.start_date != "" and rental.end_date != "" and 
+        if rental.car_id.to_i > 0 and rental.start_date != "" and rental.end_date != "" 
             true
         else
             raise "Rental not valid"
