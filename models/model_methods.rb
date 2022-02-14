@@ -57,7 +57,7 @@ module ModelMethods
 
         def find_index(object_id)
             index = -1
-            all.each_with_index do |object, idx|
+            find_all.each_with_index do |object, idx|
                 if object.id == object_id
                     index = idx
                     break

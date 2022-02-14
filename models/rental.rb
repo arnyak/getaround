@@ -1,19 +1,11 @@
 require 'date'
-require_relative 'model_methods'
-require_relative 'user'
-require_relative 'car'
-require_relative 'option'
 
-
+['model_methods', 'user', 'car', 'option'].each {|f| require_relative f }
 
 class Rental
 
     include ModelMethods::InstanceMethods
     extend ModelMethods::ClassMethods
-    
-    attr_reader :id
-    attr_accessor :car_id, :start_date, :end_date, :distance, :driver_id
-
 
     def initialize(attributes = {})
         @id = attributes[:id].nil? ? Rental.generate_id : attributes[:id]
