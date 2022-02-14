@@ -24,7 +24,6 @@ describe 'level5' do
         rental = Rental.new( { id: 1, car_id: 1, start_date: "2015-12-8", end_date: "2015-12-8", distance: 100 })
         options = [ Option.new({id: 1, rental_id: 1,  type: "gps"}), Option.new({id: 2, rental_id: 1,  type: "baby_seat"})]
 
-
         expect(rental.decreasing_rental_price_with_options).to eq 3700
     end
 
